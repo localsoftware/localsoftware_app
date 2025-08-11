@@ -1,0 +1,26 @@
+{
+  "development": {
+    "logging": false,
+    "username": "postgres",
+    "password": "postgrespass",
+    "database": "localsoftware",
+    "host": "lc-develop-local.cc0mpzi77grf.us-west-2.rds.amazonaws.com",
+    "dialect": "postgres"
+  },
+  "test": {
+    "logging": false,
+    "username": "postgres",
+    "password": "postgrespass",
+    "database": "localsoftware_test",
+    "host": "54.227.111.118",
+    "dialect": "postgres"
+  },
+  "production": {
+    "logging": false,
+    "username": "postgres",
+    "password": "postgrespass",
+    "database": "localsoftware",
+    "host": "lc-develop.cc0mpzi77grf.us-west-2.rds.amazonaws.com",
+    "dialect": "postgres"
+  }
+}

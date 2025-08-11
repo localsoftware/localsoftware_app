@@ -1,0 +1,101 @@
+{
+  "Comment": "Extract and Save the Shapefile",
+  "StartAt": "Extract Shp",
+  "States": {
+    "Extract Shp": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:122695763785:function:extractShp-dev",
+      "ResultPath": "$.extractData",
+      "Next": "Save Layer Features by Chunk"
+    },
+    "Save Layer Features by Chunk": {
+      "Type": "Map",
+      "ItemsPath": "$.extractData.featureIdsChuncksIds",
+      "ResultPath": null,
+      "Parameters": {
+        "identityId.$": "$.identityId",
+        "zipfile.$": "$.zipfile",
+        "chunkId.$": "$$.Map.Item.Value"
+      },
+      "Iterator": {
+        "StartAt": "Extract Shp Features",
+        "States": {
+          "Extract Shp Features": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:122695763785:function:extractShpFeatures-dev",
+            "ResultPath": "$.featureIds",
+            "End": true
+          }
+        }
+      },
+      "Next": "Save Shp To DB"
+    },
+    "Save Shp To DB": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:us-east-1:122695763785:function:saveShpToDB-dev",
+      "Parameters": {
+        "userId.$": "$.userId",
+        "identityId.$": "$.identityId",
+        "zipfile.$": "$.zipfile",
+        "datasetInfo.$": "$.extractData.datasetInfo"
+      },
+      "ResultPath": "$.shpfileId",
+      "Next": "Save Layer Features"
+    },
+    "Save Layer Features": {
+      "Type": "Map",
+      "ItemsPath": "$.extractData.featureIdsChuncksIds",
+      "ResultPath": null,
+      "Parameters": {
+        "userId.$": "$.userId",
+        "identityId.$": "$.identityId",
+        "zipfile.$": "$.zipfile",
+        "shpfileId.$": "$.shpfileId",
+        "chunkId.$": "$$.Map.Item.Value"
+      },
+      "Iterator": {
+        "StartAt": "Get Chunk Features",
+        "States": {
+          "Get Chunk Features": {
+            "Type": "Task",
+            "ResultPath": "$.featureIdsChunk",
+            "Resource": "arn:aws:lambda:us-east-1:122695763785:function:getFeatureIdsByChuckId-dev",
+            "Next": "Save Chunk Layer Features"
+          },
+          "Save Chunk Layer Features": {
+            "Type": "Map",
+            "ItemsPath": "$.featureIdsChunk",
+            "ResultPath": null,
+            "Parameters": {
+              "userId.$": "$.userId",
+              "identityId.$": "$.identityId",
+              "zipfile.$": "$.zipfile",
+              "shpfileId.$": "$.shpfileId",
+              "featureId.$": "$$.Map.Item.Value"
+            },
+            "Iterator": {
+              "StartAt": "Save Layer Feature",
+              "States": {
+                "Save Layer Feature": {
+                  "Type": "Task",
+                  "Resource": "arn:aws:lambda:us-east-1:122695763785:function:saveLayerFeature-dev",
+                  "End": true
+                }
+              }
+            },
+            "End": true
+          }
+        }
+      },
+      "Next": "Processed"
+    },
+    "Processed": {
+      "Type": "Pass",
+      "Next": "Final"
+    },
+    "Final": {
+      "Type": "Pass",
+      "End": true
+    }
+  }
+}

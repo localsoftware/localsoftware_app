@@ -1,0 +1,44 @@
+{
+  "layerVersionMap": {
+    "1": {
+      "permissions": [
+        {
+          "type": "private"
+        }
+      ],
+      "hash": "7ea/Rb8K/hYg2Vl6LYatv1Tf2E1R4V5kXVSFNxiwygI="
+    },
+    "2": {
+      "permissions": [
+        {
+          "type": "private"
+        }
+      ],
+      "hash": "hahAKGedVLHHwKsxqJFA6mAwO3iHSLE4OuooEOnvprk="
+    },
+    "3": {
+      "permissions": [
+        {
+          "type": "private"
+        }
+      ],
+      "hash": "6ILIPKXCYVjoaEUkRDGLqH8Bu0mGklqBB70qcR2ePBg="
+    },
+    "4": {
+      "permissions": [
+        {
+          "type": "private"
+        }
+      ],
+      "hash": "wyVnQuRbRrU64txatiOahEUj1cAKjw6NH5i3wdvcOOc="
+    }
+  },
+  "runtimes": [
+    {
+      "value": "nodejs",
+      "name": "NodeJS",
+      "layerExecutablePath": "nodejs/node_modules",
+      "cloudTemplateValue": "nodejs10.x"
+    }
+  ]
+}

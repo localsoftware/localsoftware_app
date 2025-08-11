@@ -1,0 +1,58 @@
+[
+  {
+    "name": { 
+      "first" : "Nicholas de", 
+      "last" : "Monchaux"
+    },
+    "imageUrl" : "/team_pictures/nicholas.jpg",
+    "title": "Principal Investigator",
+    "about":
+      "<div>Nicolas de Monchaux is Professor of Architecture, Urban Design and New Media at UC Berkelhey, and partner in the Oakland, CA architecture practice <a href='https://modem.work/'>Modem.</a> Along with Local Code, he is the author of Spacesuit: Fashioning Apollo, winner of the Eugene Emme Award from the American Astronautical Society and shortlisted for the Art Book Prize. He is a fellow of the American Academy in Rome.</div>"
+  },
+  {
+    "name": { 
+      "first" : "Carlos", 
+      "last" : "Sandoval"
+    },
+    "imageUrl" : "/team_pictures/carlos.jpg",
+    "title": "Project  Manager",
+    "about": ""
+  },
+  {
+    "name": { 
+      "first" : "Ting-Kai", 
+      "last" : "Chang"
+    },
+    "imageUrl" : "/team_pictures/kai.jpg",
+    "title": "Software Development Manager",
+    "about": "A freelance web developer, studied in EE and Transportation Eng. Now Kai work with researchers, artists, and investors in the US and Taiwan."
+  },
+  {
+    "name": { 
+      "first" : "Paloma", 
+      "last" : "Gonzalez"
+    },
+    "imageUrl" : "/team_pictures/paloma.jpg",
+    "title": "Design Software Development",
+    "about":
+      "PhD Candidate at the MIT Design and Computation Group, Paloma is a researcher of computational methods for the design/building process, advanced manufacturing, and material systems."
+  },
+  {
+    "name": { 
+      "first" : "Olivia", 
+      "last" : "Serra"
+    },
+    "imageUrl" : "/team_pictures/olivia.jpg",
+    "title": "UI/UX Design",
+    "about": "Olivia is a SMArchS Urbanism 2021 at MIT. Her professional and research interests revolve around social and environmental analysis, spatializing data and data-driven design."
+  },
+  {
+    "name": { 
+      "first" : "Nikodimos", 
+      "last" : "Sendek"
+    },
+    "imageUrl" : "/team_pictures/nikodimos.jpg",
+    "title": "UI/UX Engineer",
+    "about": "Nikodimos is a rising senior at MIT pursuing a double major in Computer Science and Design. His professional experiences include extensive amounts of web development / full-stack projects and UI/UX design." 
+  }
+]

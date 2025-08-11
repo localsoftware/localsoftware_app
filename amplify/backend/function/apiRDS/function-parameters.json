@@ -1,0 +1,51 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "website6ba563a3": [
+          "read",
+          "update"
+        ]
+      },
+      "api": {
+        "api": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      },
+      "storage": {
+        "data": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "User:@model(appsync)": [
+          "read",
+          "update"
+        ],
+        "Layer:@model(appsync)": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "Pkg:@model(appsync)": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "connectDB",
+      "version": 4
+    }
+  ]
+}

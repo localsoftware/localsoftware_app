@@ -1,0 +1,26 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "website6ba563a3": [
+          "read"
+        ]
+      },
+      "api": {
+        "api": [
+          "read",
+          "update"
+        ]
+      },
+      "storage": {
+        "data": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": []
+}

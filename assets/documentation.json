@@ -1,0 +1,217 @@
+{
+    "Bake with Attributes" : {
+        "imagePath" : "/site_ex/bake_attributes/bake_attributes.jpg",
+        "ghPath": "/site_ex/bake_attributes/bake_attributes.gh",
+        "otherPath": "/site_ex/bake_attributes/shapefiles.zip",
+        "summary" : "The geometry is baked by branch into specific layers. Geometry objects can have colors, widths, and materials as attributes. You can group the baked objects and delete all the previous instances of the objects.",
+        "example" : "Input geometry and separate (graph) them into branches of a data tree. Provide a list of layer names to each branch that will be baked. Input all the desired attributes. Use a 'make Material' LocalCode component to make and assign a material to each layer. Toggle the 'Bake' boolean to activate the component.",
+        "inputs" : {
+            "geometry": "Geometry as a tree of objects",
+            "layers": "Layer names as a list of strings",
+            "colors": "Color swatches as a list",
+            "widths": "List of floats",
+            "materials": "List of LocalCode Materials",
+            "delete": "Boolean to delete 'EVERY' previous instance of the geometry",
+            "group": "Boolean to group all objects",
+            "bake": "Boolean that bakes the geometry with attributes into Rhino"
+        }
+    },
+
+    "Batch Export" : {
+        "imagePath" : "/site_ex/batch_export/batch_export.jpg",
+        "ghPath": "/site_ex/batch_export/batch_export.gh",
+        "otherPath": "/site_ex/batch_export/shapefiles.zip",
+        "summary" : "This component exports GH geometry structured as a tree into files. The output file number is the same as the number of input file names. The output file extensions can be .3DM, .DWG, .SVG, or .AI.",
+        "example" : "Input geometry as branches, a list of file names, an export file path, and a boolean to activate the component. The Layer names list, colors list, and 'delete existing' boolean inputas are optional. When 'Export' is set to 'True', files will be created.",
+        "inputs" : {
+            "geometry": "Data tree of geometries. Every branch corresponds to a layer.",
+            "exportFileName": "Export file name.",
+            "exportFilePath": "Target directory.",
+            "layerNames": "List of layer names to bake geometry into.",
+            "layerColors": "List of colors (Optional). Can be one color or as many colors as layer names.",
+            "export": "boolean to run component",
+            "deleteExisting": "boolean to delete geometry already in document."
+        }
+    },
+
+    "Batch Import" : {
+        "imagePath" : "/site_ex/batch_import/batch_import.jpg",
+        "ghPath": "/site_ex/batch_import/batch_import.gh",
+        "summary" : "Imports .3dm files into Rhino and Grasshopper, preserves layers' hierarchy as a data tree. The component can erase existing geometry in the Rhinodoc.",
+        "example" : "Takes a number of files and imports their geometries to GH. You need to provide a path for the folder that contains the files to be imported. Use the string concatenate component to join the file path of the folder with the number/name of the file to be imported. You can specify the file number with a slider",
+        "inputs" : {
+            "filename": "List of file(s) to import (string)",
+            "import": "boolean to activate the import",
+            "deleteExisting": "boolean to delete existing geometry in file"
+        }
+    },
+
+    "Compare GIS Attributes" : {
+        "imagePath" : "/site_ex/compare_attributes/compare_attributes.jpg",
+        "ghPath": "/site_ex/compare_attributes/compare_attributes.gh",
+        "otherPath": "/site_ex/compare_attributes/shapefiles.zip",
+        "summary" : "Determines if an attribute exists in a list of attributes. Returns a True/False map of the attribute location in the list.",
+        "example" : "You can provide an Attribute Name by typing it on a GH Panel (note that you need to type the value that you’re comparing with the exact same characters and spaces of the compared value) and plugin it into the AttributeName input of the component. You can provide an Attribute Name by selecting a specific Attribute form the original list of GIS attributes. If you choose to do it this way, you need to provide an Index Number, which is the position in the list of the attribute you want to compare (Note that the lists in grasshopper always start with zero). You can either plug a slider or a Panel with a number to the AttributeIndex input of the component. If you choose to provide an AttributeIndex, you should Flatten the AttributeIndex input and Graft the Boolean output.",
+        "inputs" : {
+            "AttributeList": "list of attributes",
+            "AttributeName": "name of attribute you want to find in the list",
+            "AttributeIndex": "index of attribute you want to identify in the list"
+        }
+
+    },
+
+    "Create View" : {
+        "imagePath" : "/site_ex/create_set_view/create_set_view.jpg",
+        "ghPath": "/site_ex/create_set_view/create_set_view.gh",
+        "summary" : "Transforms view data into a Rhino view. Creating a view is the first step to set a view in Rhino’s viewport. To select a view, you need a geometry to point to. You can define view angles.",
+        "example" : "Input the curve to point to, so you should never input a surface, brep or mesh as geometry to create a view.Select an Azimuth and Altitude angle. The angles go between 0 and 360, and represent the position of a “camera” around the base object.",
+        "inputs" : {
+            "geometry": "curve geometry to focus on in view",
+            "azimuth":"Camera rotation in XY. 0 to 360.",
+            "altitude": "Camera z-position. -90 to 90."
+        }
+
+    },
+
+    "Delete All" : {
+        "imagePath" : "/site_ex/delete_all/delete_all.jpg",
+        "ghPath": "/site_ex/delete_all/delete_all.gh",
+        "summary" : "Deletes the Rhino geometry created by GH components. This is useful for batch processing multiple files.",
+        "example" : "Input the geometry to be deleted to the geometry input. Toggle a boolean in the 'Delete' input to erase the target objects.",
+        "inputs" : {
+            "geometry": "geometry to delete",
+            "delete": "boolean delete"  
+        }
+    },
+
+    "Import GeoJSON" : {
+        "imagePath" : "/site_ex/geojson_pack/geojson_pack.jpg",
+        "ghPath": "/site_ex/geojson_pack/geojson_pack.gh",
+        "summary" : "Preserves layer hierarchy as data tree. The Import GeoJSON component extracts the GIS attributes from the geoJSON files.",
+        "example" : "Input a path as a string to import geoJSON files.",
+        "inputs" : {
+            "import": "boolean to start import",
+            "geoJSONFolderPath": "path to folder with GeoJSON files",
+            "siteNumber": "int site number"
+        }
+    },
+
+    "Select Layer from GeoJSON" : {
+        "imagePath" : "/site_ex/geojson_layer/geojson_layer.jpg",
+        "ghPath": "/site_ex/geojson_layer/geojson_layer.gh",
+        "summary" : "Get a specific layer from the Import GeoJSON component, with all the branches that are within that layer.",
+        "example" : "Input geometry, attributes, values and layer names from the Import GeoJSON component. Input a value for layer number to get the geometry, attributes, values and names within that layer.",
+        "inputs" : {
+            "LayerNumber": "int Layer number as value",
+            "Geometry": "Geometry as a tree",
+            "Attributes": "Attributes as a tree",
+            "Values": "Values as a tree",
+            "LayerNames": "Layer names as a tree"
+        }
+    },
+
+    "Make Material" : {
+        "imagePath" : "/site_ex/make_material/make_material.png",
+        "ghPath": "/site_ex/make_material/make_material.gh",
+        "otherPath": "/site_ex/make_material/shapefiles.zip",
+        "summary" : "Returns a new Material, a Render Material and a GH Preview Material using the parameters set as inputs. To bake into Rhino you need to use the 'Bake with Attributes' LocalCode component. The material will be baked into a layer.",
+        "example" : "Input a name and a diffuse color and create a material. The rest of the inputs are optional. Use the 'Material' output to assign the material to a geometry. Plug the 'GHMaterial' output to a 'Preview' component to visualize your material on GH objects.",
+        "inputs" : {
+            "name": "name string",
+            "diffuseColor": "diffuse color",
+            "specularColor": "specular color",
+            "emissioColor": "emission color",
+            "transparency": "transparency from 0 to 1",
+            "reflectionRange": "reflection range from 0 to 1",
+            "glossiness": "glossiness from 0 to 1"
+        }
+    },
+
+    "Pickle Data" : {
+        "imagePath" : "/site_ex/pickle_data/pickle_data.jpg",
+        "ghPath": "/site_ex/pickle_data.gh",
+        "otherPath": "/site_ex/shapefiles.zip",
+        "summary" : "Exports geometry into Python pickles that can be imported again later. Pickles are a faster, lighter, and more efficient way to manage files than Rhino files. Geometry is serialized into pickles, which is a Python binary file.",
+        "example" : "Plug in the geometry (flattened) you want to export into the data input of the component. Plug in a slider or number to the siteNumber input of the component. Pickle’s numbers always need to start with number one. This names the pickle according to a specific site. If you’re only working with one site, you can leave the siteNumber empty. Use a panel to type a layer name for the geometry you are exporting, plug it to the layer input of the component. Specify a path for the pickles, this will be the folder where the pickles will be exported to. Plug a boolean toggle to the write input of the component and set it to 'True'.",
+        "inputs" : {
+            "data": "geometry or data to serialize",
+            "siteNumber": "local code site number (optional)",
+            "path": "path of directory for target binary file",
+            "layer": "name of file",
+            "write": "boolean"
+        }
+    },
+
+    "Read Shapefile" : {
+        "imagePath" : "/site_ex/read_shp/read_shp.jpg",
+        "ghPath": "/site_ex/read_shp/read_shp.gh",
+        "otherPath": "/site_ex/read_shp/shapefiles.zip",
+        "summary" : "Directly imports SHP files and turns them into Grasshopper geometries. Their GIS attributes are stored as User Strings in the geometry.",
+        "example" : "Get the location (Flie Path) of the SHPfile you want to import. The file path should include the name of the .shp file. Add two Boolean toggles. Plug them into the 'Read' and 'move To Center' inputs. When Read is set to True, the component will load the SHP file into GH. When moveToCenter is set to true, the SHP file geometries will be moved to the center of the Rhino Workspace, otherwise they'll be imported into their global projection",
+        "inputs" : {
+            "shapefile": "path to shapefile",
+            "read": "boolean to run script",
+            "moveToCenter": "boolean to center imported geometry at origin"
+        }
+    },
+
+    "UnPickle Data" : {
+        "imagePath" : "/site_ex/unpickle_data/unpickle_data.jpg",
+        "ghPath": "/site_ex/unpickle_data/unpickle_data.gh",
+        "otherPath": "/site_ex/unpickle_data/pickles.zip",
+        "summary" : "Un-pickles (de-serializes) pickled files into Grasshopper geometries. Un-pickling geometry is faster and more efficient than importing Rhino files.",
+        "example" : "You need to provide a path for the folder that contains the files to be imported. Use the string concatenate component to join the file path of the folder with the number of the file to be imported.You can specify the file number with a slider. Specify the name of the layers you want to import from the rhino file. Type the layer names in a Panel. Make sure the Multiline Data option is unchecked (you can uncheck the box while typing in the panel or by right click).",
+        "inputs" : {
+            "siteNumber": "site number",
+            "layer": "layer name",
+            "path": "path to source file directory.",
+            "read": "boolean"
+        }
+    },
+
+    "UnPickle View" : {
+        "imagePath" : "/site_ex/pickle_unpickle_view/unpickle_view.jpg",
+        "ghPath": "/site_ex/pickle_unpickle_view/unpickle_view.gh",
+        "otherPath": "/site_ex/pickle_unpickle_view/shapefiles.zip",
+        "summary" : "Sets a view by un-pickling a pickled view file. Returns a site geometry, a camera vector and a focal point.",
+        "example" : "Plug in a slider or number to the siteNumber input of the component. This numbere will be the site number, and name of the pickle. If you’re only working with one site, you can leave it empty. Specify a path for the pickles. This is the folder where the pickles are.Finally plug in a boolean toggle component to the read input of the component. Once you are ready to UnPickle the geometry, set it to true. The component will return a site geometry a camera vector and a camera target.",
+        "inputs" : {
+            "siteNumber": "site number",
+            "layer": "layer name",
+            "path": "path to source file directory.",
+            "read": "boolean"
+        }
+    },
+
+    "Write SHP" : {
+        "imagePath" : "/site_ex/write_shp/write_shp.jpg",
+        "ghPath": "/site_ex/write_shp/write_shp.gh",
+        "summary" : "Writes GH Geometries into ESRI Shapefiles.",
+        "example" : "Input geoemtry, projection and a boolean to export a shapefile.",
+        "inputs" : {
+            "geometry": "List of geometry objects to save in shapefile.",
+            "fields": "List of attribute names for all geometry objects.",
+            "values": "Tree with attribute values for all geometry objects.",
+            "path": "Path to destination file.",
+            "filename": "destination file name.",
+            "activate": "Boolean to write shapefile.",
+            "projection": "map projection to create PRJ file (required for readShapefile)"
+        }
+    },
+
+    "Spatial Join" : {
+        "imagePath" : "/site_ex/spatial_join/spatial_join.jpg",
+        "ghPath": "/site_ex/spatial_join/spatial_join.gh",
+        "otherPath": "/site_ex/spatial_join/shapefiles.zip",
+        "summary" : "Merge attributes from geometries with overlapping location, contained geometries inherit the values and attributes from container geometries.",
+        "example" : "Input geometry layer for contained and containers, input contained and container attributes and values to get as output the contained geometry, with it’s original list for attributes and values and the new attributes and values inherited from the container geometry.",
+        "inputs" : {
+            "Contained": "Geometry for contained objects.",
+            "Containers": "Geometry for container objects.",
+            "ContainedAttributes": "Attributes from the layer with contained objects.",
+            "ContainedValues": "Values from the layer with contained objects.",
+            "ContainerAttributes": "Attributes from the layer with container objects.",
+            "ContainerValues": "Values from the layer with container objects."
+        }
+    }
+}

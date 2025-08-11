@@ -1,0 +1,7 @@
+{
+  "arguments": {
+    "model": "Datafile",
+    "method": "findAll",
+    "query": "{\"where\":{\"userId\":1,\"deleted\":{\"$not\":true}}}"
+  }
+}

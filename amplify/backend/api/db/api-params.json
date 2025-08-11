@@ -1,0 +1,42 @@
+{
+    "paths": [
+        {
+            "name": "/rds",
+            "lambdaFunction": "apiRDS",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "db",
+    "apiName": "db",
+    "functionArns": [
+        {
+            "lambdaFunction": "apiRDS"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-website-dev-181257-authRole",
+        "unAuthRoleName": "amplify-website-dev-181257-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "apiRDS",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "431f9980"
+}

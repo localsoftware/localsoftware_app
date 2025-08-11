@@ -1,0 +1,76 @@
+# https://docs.amplify.aws/cli/graphql-transformer/storage#basics
+
+enum State {
+  CREATED
+  PROCESSING  
+  PROCESSED
+  FAILED
+  DELETED
+}
+
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  email: String!
+}
+
+type Layer @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userId: ID!
+  
+  fileId: ID
+
+  zipfile: String
+
+  name: String!
+  desc: String
+  bbox: [Float!]
+
+  progress: Int
+  state: State
+}
+
+type Pkg @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  userId: ID!
+
+  fileId: ID
+
+  siteLayerId: ID,
+  siteFileId: ID,
+
+  layerIds: [ID!]!
+  layerFileIds: [ID!]!
+  
+  name: String
+  bbox: String
+
+  radius: String
+  radiusUnit: String
+
+  progress: Int
+  state: State
+}
+
+type Query {
+  helloworld(msg: String): String @function(name: "helloworld-${env}")
+  getUserIdFromDB: String @function(name: "getUserIdFromDB-${env}")
+  queryDataFromDB(
+    model: String!
+    method: String!
+    updates: String
+    query: String
+  ): String @function(name: "queryDataFromDB-${env}")
+  serveData(
+    type: String!
+    payload: String!
+  ): String @function(name: "serveData-${env}")
+}
+
+type Mutation {
+  runPackager(
+    type: String
+    userId: String
+    identityId: String
+    data: String
+  ): String @function(name: "runPackager-${env}")
+}

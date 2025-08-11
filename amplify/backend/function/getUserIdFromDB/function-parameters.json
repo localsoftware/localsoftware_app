@@ -1,0 +1,18 @@
+{
+  "mutableParametersState": {
+    "permissions": {
+      "auth": {
+        "website6ba563a3": [
+          "read"
+        ]
+      }
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "connectDB",
+      "version": 2
+    }
+  ]
+}

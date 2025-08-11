@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/helloworld",
+            "lambdaFunction": "helloworld",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "helloworld",
+    "apiName": "helloworld",
+    "functionArns": [
+        {
+            "lambdaFunction": "helloworld"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-website-dev-181257-authRole",
+        "unAuthRoleName": "amplify-website-dev-181257-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "helloworld",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

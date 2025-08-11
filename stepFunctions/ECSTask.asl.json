@@ -1,0 +1,92 @@
+{
+  "Comment": "An example of the Amazon States Language for notification on an AWS Fargate task completion",
+  "StartAt": "Run Fargate Task",
+  "States": {
+    "Run Fargate Task": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::ecs:runTask.sync",
+      "Parameters": {
+        "LaunchType": "FARGATE",
+        "Cluster": "arn:aws:ecs:us-east-1:122695763785:cluster/StepFunctionsSample-ContainerTaskManagementc07dbdb3-e470-47fb-971e-a4f24ebc502b-ECSCluster-LqpAj300bgQX",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:122695763785:task-definition/StepFunctionsSample-ContainerTaskManagementc07dbdb3-e470-47fb-971e-a4f24ebc502b-ECSTaskDefinition-Xkf0I6VfVAUy:5",
+        "Overrides": {
+          "ContainerOverrides": [
+            {
+              "Name": "lc_packager",
+              "Environment": [
+                {
+                  "Name": "REGION",
+                  "Value": "us-east-1"
+                },
+                {
+                  "Name": "STORAGE_DATA_BUCKETNAME",
+                  "Value": "data181257-dev"
+                },
+                {
+                  "Name": "LAYER_TABLE_NAME",
+                  "Value": "Layer-oaumvi2vofbl3bktnli6whmy5u-dev"
+                },
+                {
+                  "Name": "PKG_TABLE_NAME",
+                  "Value": "Pkg-oaumvi2vofbl3bktnli6whmy5u-dev"
+                },
+                {
+                  "Name": "LC_TYPE",
+                  "Value.$": "$.type"
+                },
+                {
+                  "Name": "USER_ID",
+                  "Value.$":"$.userId"
+                },
+                {
+                  "Name": "IDENTITY_ID",
+                  "Value.$":"$.identityId"
+                },
+                {
+                  "Name": "LC_DATA",
+                  "Value.$":"$.data"
+                }
+              ]
+            }
+          ]
+        },
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "Subnets": [
+              "subnet-04805181e95f6b964",
+              "subnet-0e0010fd536a4d477"
+            ],
+            "AssignPublicIp": "ENABLED"
+          }
+        }
+      },
+      "Next": "Notify Success",
+      "Catch": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "Next": "Notify Failure"
+        }
+      ]
+    },
+    "Notify Success": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "Message": "AWS Fargate Task started by Step Functions succeeded",
+        "TopicArn": "arn:aws:sns:us-east-1:122695763785:StepFunctionsSample-ContainerTaskManagementc07dbdb3-e470-47fb-971e-a4f24ebc502b-SNSTopic-1MQM9Z83AZ832"
+      },
+      "End": true
+    },
+    "Notify Failure": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "Message": "AWS Fargate Task started by Step Functions failed",
+        "TopicArn": "arn:aws:sns:us-east-1:122695763785:StepFunctionsSample-ContainerTaskManagementc07dbdb3-e470-47fb-971e-a4f24ebc502b-SNSTopic-1MQM9Z83AZ832"
+      },
+      "End": true
+    }
+  }
+}
